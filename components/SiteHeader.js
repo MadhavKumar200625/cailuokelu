@@ -1,6 +1,98 @@
 "use client";
+
 import Link from "next/link";
 import { useState } from "react";
-const services=[['Private Label','/services/private-label'],['Product Development','/services/product-development'],['Custom Packaging','/services/custom-packaging'],['Fabric Sourcing','/services#fabric-sourcing'],['Quality Assurance','/services#quality-assurance']];
-const navClass="flex h-full items-center border-b-2 border-transparent px-3 text-[15px] font-medium tracking-[0.08em] text-[#211e1a] transition hover:border-[#b58743]";
-export default function SiteHeader(){const[menu,setMenu]=useState(false),[drop,setDrop]=useState(false);const close=()=>{setMenu(false);setDrop(false)};return <header className="relative z-50 bg-[#f8f4ee]"><div className="flex h-9 items-center justify-center bg-[#b98b43] px-4 text-center font-serif text-[11px] font-semibold tracking-[0.12em] text-[#1d1813]">CAILUO KELU — PRIVATE LABEL INTIMATES — DESIGNED FOR COMFORT — MADE WITH INTENT</div><div className="mx-auto flex h-28 max-w-[1600px] items-center justify-between px-5 lg:px-10"><Link href="/" onClick={close} className="flex min-w-0 items-center gap-2 font-serif text-[17px] font-semibold tracking-[0.08em] text-[#211e1a] sm:text-[20px]"><span>CAILUO</span><i className="not-italic text-[#b58743]">•</i><span className="text-[#b58743]">KELU</span><span className="hidden border-l border-[#211e1a]/30 pl-3 text-[10px] font-medium tracking-[0.12em] text-[#7c746c] xl:block">INTIMATE APPAREL</span></Link><nav className="hidden h-full items-center lg:flex"> <Link href="/" className={navClass}>Home</Link><Link href="/collections" className={navClass}>Collections</Link><div className="relative h-full"><button onClick={()=>setDrop(!drop)} className={navClass} aria-expanded={drop}>Services <span className="ml-2 text-[20px] font-normal leading-none text-[#b58743]">+</span></button>{drop&&<div className="absolute left-0 top-[88px] grid w-72 bg-[#211e1a] p-4 shadow-2xl">{services.map(([name,href],index)=><Link href={href} key={href} onClick={close} className="grid grid-cols-[28px_1fr_20px] border-b border-white/15 py-3 font-serif text-[16px] text-[#f8f4ee] last:border-0"><i className="pt-1 font-mono text-[9px] not-italic text-[#b58743]">0{index+1}</i>{name}<b className="font-normal text-[#b58743]">↗</b></Link>)}</div>}</div><Link href="/about" className={navClass}>About</Link><Link href="/contact" className={navClass}>Contact</Link></nav><Link href="/contact" className="hidden bg-[#211e1a] px-5 py-4 text-[12px] font-semibold tracking-[0.1em] text-[#f8f4ee] transition hover:bg-[#b58743] lg:block">START A PROJECT <span className="ml-2 text-[#d7ae68]">↗</span></Link><button onClick={()=>setMenu(!menu)} className="grid h-11 w-11 place-content-center gap-1.5 lg:hidden" aria-label="Toggle menu"><span className="block h-px w-6 bg-[#211e1a]"></span><span className="block h-px w-6 bg-[#211e1a]"></span><span className="mt-1 font-mono text-[8px] tracking-widest">{menu?'CLOSE':'MENU'}</span></button></div>{menu&&<nav className="border-t border-[#211e1a]/15 px-5 py-3 lg:hidden"><Link href="/" onClick={close} className="block border-b border-[#211e1a]/15 py-4 text-[15px] font-medium tracking-wider">Home</Link><Link href="/collections" onClick={close} className="block border-b border-[#211e1a]/15 py-4 text-[15px] font-medium tracking-wider">Collections</Link><button onClick={()=>setDrop(!drop)} className="flex w-full justify-between border-b border-[#211e1a]/15 py-4 text-left text-[15px] font-medium tracking-wider">Services <span>+</span></button>{drop&&<div className="border-b border-[#211e1a]/15 pb-2">{services.map(([name,href])=><Link href={href} key={href} onClick={close} className="block py-2 pl-4 text-[14px] text-[#625b53]">{name}</Link>)}</div>}<Link href="/about" onClick={close} className="block border-b border-[#211e1a]/15 py-4 text-[15px] font-medium tracking-wider">About</Link><Link href="/contact" onClick={close} className="block py-4 text-[15px] font-medium tracking-wider">Contact</Link></nav>}</header>}
+
+const services = [
+  ["Private label", "/services/private-label"],
+  ["Product development", "/services/product-development"],
+  ["Custom packaging", "/services/custom-packaging"],
+];
+
+const navLinks = [
+  ["Collections", "/collections"],
+  ["About", "/about"],
+  ["Services", "/services"],
+  ["Journal", "/about"],
+  ["Contact", "/contact"],
+];
+
+export default function SiteHeader() {
+  const [menu, setMenu] = useState(false);
+  const [drop, setDrop] = useState(false);
+
+  const close = () => {
+    setMenu(false);
+    setDrop(false);
+  };
+
+  const linkClass = "text-[10px] font-medium uppercase tracking-[0.22em] text-[#171312] transition hover:text-[#b8925a]";
+
+  return (
+    <header className="relative z-50 border-b border-[#171312]/10 bg-[#f6f1ea] shadow-[0_18px_40px_rgba(23,19,18,0.04)]">
+      <div className="flex min-h-10 items-center justify-center bg-[#171312] px-4 py-2 text-center text-[9px] font-medium uppercase tracking-[0.22em] text-[#f6f1ea]">
+        Crafted for labels with a more considered point of view
+      </div>
+
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-5 px-5 py-4 lg:px-10">
+        <div className="flex items-center gap-4">
+          <Link href="/" onClick={close} className="block shrink-0">
+            <img src="/images/cailuo-kelu-logo.svg" alt="Cailuo Kelu logo" className="h-11 w-auto lg:h-14" />
+          </Link>
+          <div className="hidden items-center gap-2 border-l border-[#171312]/15 pl-4 text-[9px] uppercase tracking-[0.25em] text-[#171312]/60 lg:flex">
+            <span>Intimates</span>
+            <span className="text-[#b8925a]">•</span>
+            <span>Luxury essentials</span>
+          </div>
+        </div>
+
+        <nav className="hidden items-center gap-7 lg:flex">
+          {navLinks.map(([name, href]) => (
+            <Link key={name} href={href} className={linkClass}>
+              {name}
+            </Link>
+          ))}
+
+          <div className="relative">
+            <button onClick={() => setDrop((value) => !value)} className={`${linkClass} flex items-center gap-2`} aria-expanded={drop}>
+              Services <span className="text-base text-[#b8925a]">+</span>
+            </button>
+            {drop && (
+              <div className="absolute right-0 top-11 w-72 border border-[#171312]/10 bg-[#171312] p-3 shadow-[0_25px_40px_rgba(23,19,18,0.14)]">
+                {services.map(([name, href], index) => (
+                  <Link key={href} href={href} onClick={close} className="flex items-center justify-between border-b border-[#f6f1ea]/10 py-3 text-sm text-[#f6f1ea] last:border-0">
+                    <span>
+                      <b className="mr-3 text-[9px] tracking-[0.2em] text-[#b8925a]">0{index + 1}</b>
+                      {name}
+                    </span>
+                    <span className="text-[#b8925a]">↗</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Link href="/contact" className="hidden border border-[#171312] bg-[#171312] px-4 py-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#f6f1ea] transition hover:border-[#b8925a] hover:bg-[#b8925a] hover:text-[#171312] sm:block">
+            Start a project ↗
+          </Link>
+          <button onClick={() => setMenu((value) => !value)} className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#171312] lg:hidden" aria-expanded={menu}>
+            {menu ? "Close" : "Menu"}
+          </button>
+        </div>
+      </div>
+
+      {menu && (
+        <nav className="grid gap-5 border-t border-[#171312]/10 bg-[#efe3d2] px-5 py-6 lg:hidden">
+          {navLinks.map(([name, href]) => (
+            <Link key={name} href={href} onClick={close} className={linkClass}>{name}</Link>
+          ))}
+          <Link href="/services/private-label" onClick={close} className={linkClass}>Private label</Link>
+          <Link href="/services/product-development" onClick={close} className={linkClass}>Product development</Link>
+          <Link href="/contact" onClick={close} className={linkClass}>Contact</Link>
+        </nav>
+      )}
+    </header>
+  );
+}

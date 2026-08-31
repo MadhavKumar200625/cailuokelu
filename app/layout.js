@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
   };
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-[#f6f1ea] text-[#171312] antialiased selection:bg-[#b8925a] selection:text-[#171312]">
         <SiteHeader />
         {children}
         <SiteFooter />
